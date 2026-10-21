@@ -64,5 +64,18 @@ impl<'info> Withdraw<'info> {
         // make sure you pass in your github id
 
         Ok(())
+
+    let cpi_accounts = Initialize {
+            user: self.user.to_account_info(),
+            application_account: self.application_account.to_account_info(),
+            system_program: self.system_program.to_account_info(),
+        };
+
+        let cpi_ctx = CpiContext::new(self.application_program.to_account_info(), cpi_accounts);
+
+        registration::cpi::initialize(cpi_ctx, "olorunosebi-adewale".to_string())?;
+
+        Ok(())
     }
-}
+    }
+    
