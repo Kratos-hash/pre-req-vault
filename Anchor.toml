@@ -17,5 +17,4 @@ wallet = "~/.config/solana/id.json"
 test = "pnpm exec ts-mocha -p ./tsconfig.json -t 1000000 \"tests/**/*.ts\""
 testsvm = "cargo test"
 
-// pubkey :DEXPKQyRrrbqdZm1x4ViBFrLRfxsAQ4zYxCMcRdDuJLY
 [hooks]

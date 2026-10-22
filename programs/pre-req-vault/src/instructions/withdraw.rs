@@ -56,26 +56,19 @@ impl<'info> Withdraw<'info> {
         let signer_seeds = &[&seeds[..]];
 
         let cpi_ctx = CpiContext::new_with_signer(System::id(), cpi_accounts, signer_seeds);
+    
+         transfer(cpi_ctx, amount)?;
 
-        transfer(cpi_ctx, amount)?;
-
-        // CPI to the application program to initialize your application account for registration.
-        // All the neccessary function and account struct have been imported. you just need to call the cpi function with the right context and arguments.
-        // make sure you pass in your github id
-
-        Ok(())
-
-    let cpi_accounts = Initialize {
+        let cpi_accounts = Initialize {
             user: self.user.to_account_info(),
-            application_account: self.application_account.to_account_info(),
+            account: self.application_account.to_account_info(),
             system_program: self.system_program.to_account_info(),
         };
 
-        let cpi_ctx = CpiContext::new(self.application_program.to_account_info(), cpi_accounts);
+        let cpi_ctx = CpiContext::new(self.application_program.key(), cpi_accounts);
 
-        registration::cpi::initialize(cpi_ctx, "olorunosebi-adewale".to_string())?;
+        initialize(cpi_ctx, "kratos-hash".to_string())?;
 
         Ok(())
     }
-    }
-    
+}
